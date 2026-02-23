@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
 <h1>Biudžetas</h1>
 <p>{{ zurnalas }}</p>
 <p>Balansas: {{ balansas }}</p>
@@ -7,3 +11,5 @@
     <p><input type="number" name="suma"/></p>
     <p><input type="submit" value="Įvesti"/></p>
 </form>
+
+{% endblock %}
