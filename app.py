@@ -1,9 +1,14 @@
 from flask import Flask, render_template, request, redirect
 from calendar import isleap
+import pickle
 
 app = Flask(__name__)
 
-zurnalas = []
+try:
+    with open("zurnalas.pkl", 'rb') as file:
+        zurnalas = pickle.load(file)
+except FileNotFoundError:
+    zurnalas = []
 
 @app.route("/")
 def index():
@@ -22,6 +27,8 @@ def biudzetas():
     if request.method == "POST":
         suma = int(request.form['suma'])
         zurnalas.append(suma)
+        with open("zurnalas.pkl", 'wb') as file:
+            pickle.dump(zurnalas, file)
     balansas = sum(zurnalas)
     return render_template("biudzetas.html", zurnalas=zurnalas, balansas=balansas)
 
